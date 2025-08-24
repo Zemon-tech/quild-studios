@@ -1,32 +1,33 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Globe, Smartphone, Cog } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { Mail, Github, Linkedin } from "lucide-react"
+import Link from "next/link"
 
 export default function Home() {
   const workItems = [
     {
-      image: "/int.jpg",
-      client: "Integrated Solutions",
-      industry: "Manufacturing",
-    },
-    {
+      id: "roc",
       image: "/roc.jpg",
-      client: "RohitOnCreation",
-      industry: "Video Services Agency",
+      title: "Roc Roc",
+      category: "Video Services Agency"
     },
     {
-      image: "/ca.jpg",
-      client: "GGSIPU",
-      industry: "College Management System",
+      id: "canteen",
+      image: "/canteen.png",
+      title: "Automate canteen work",
+      category: "Workflow Automation"
     },
     {
+      id: "havendrip",
       image: "/hac.jpg",
-      client: "HavenDrip",
-      industry: "GenZ Focussed E-commerce",
-      aspect: "portrait",
+      title: "Havendrip",
+      category: "E-commerce Platform"
+    },
+    {
+      id: "integrated",
+      image: "/int.jpg",
+      title: "Integrated solutions",
+      category: "Business Solutions"
     }
   ]
 
@@ -35,10 +36,10 @@ export default function Home() {
       {/* Header */}
       <header className="flex justify-between items-center p-6 md:p-8">
         <div className="text-xl font-medium">Quild</div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-black rounded-full"></div>
-          <div className="w-2 h-2 bg-black rounded-full"></div>
-        </div>
+        <nav className="flex items-center gap-8">
+          <a href="#works" className="text-sm hover:opacity-70 transition-opacity">Works</a>
+          <a href="#contact" className="text-sm hover:opacity-70 transition-opacity">Contact</a>
+        </nav>
       </header>
 
       {/* Hero Section */}
@@ -51,10 +52,10 @@ export default function Home() {
                 <br />
                 Studios
               </h1>
-              <div className="text-sm text-muted-foreground">hello@quildstudios.com</div>
+              <div className="text-sm text-gray-600">madhavvarshney1879@gmail.com</div>
             </div>
             <div className="md:pt-12">
-              <p className="text-lg md:text-xl leading-relaxed">
+              <p className="text-lg md:text-xl leading-relaxed text-gray-700">
                 Hello, We're a 5-member creative agency specializing in minimal web & app design and workflow
                 automation, working remotely with clients worldwide.
               </p>
@@ -65,30 +66,28 @@ export default function Home() {
 
       <Separator className="my-16" />
 
-      {/* Our Work Section */}
-      <section className="px-6 md:px-8 py-16">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Our Work</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Works Section */}
+      <section id="works" className="px-6 md:px-8 py-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">work.</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             {workItems.map((item, index) => (
-              <Card key={index} className="border-0 shadow-none">
-                <CardContent className="p-0">
-                  <div
-                    className={cn(
-                      "bg-muted rounded-lg mb-4 overflow-hidden",
-                      item.aspect === "portrait" ? "aspect-[9/16]" : "aspect-[16/9]"
-                    )}
-                  >
-                    <img
-                      src={item.image || "/placeholder.svg"}
-                      alt={`${item.client} project`}
-                      className="w-full h-full object-cover"
-                    />
+              <Link key={index} href={`/work/${item.id}`} className="group cursor-pointer">
+                <div className="aspect-[3/2] bg-gray-100 rounded-lg overflow-hidden relative">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="font-medium text-lg mb-1">{item.title}</h3>
+                      <p className="text-gray-200 text-sm">{item.category}</p>
+                    </div>
                   </div>
-                  <h3 className="font-medium text-lg mb-1">{item.client}</h3>
-                  <p className="text-muted-foreground text-sm">{item.industry}</p>
-                </CardContent>
-              </Card>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -96,165 +95,71 @@ export default function Home() {
 
       <Separator className="my-16" />
 
-      {/* Our Services Section */}
+      {/* About Section */}
       <section className="px-6 md:px-8 py-16">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Our Services</h2>
-          <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem value="web-development" className="border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:no-underline py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                    <Globe className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium">Web Development</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Beautiful, responsive websites that convert visitors into customers
-                    </p>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="pb-6">
-                <div className="ml-14">
-                  <h4 className="font-medium mb-3">What we offer:</h4>
-                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
-                    <li>• Custom Website Design & Development</li>
-                    <li>• E-commerce Solutions</li>
-                    <li>• Landing Pages that Convert</li>
-                    <li>• SEO Optimization & Performance</li>
-                    <li>• Progressive Web Applications</li>
-                  </ul>
-                  <h4 className="font-medium mb-3">Technologies:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"].map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-muted text-xs rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="app-development" className="border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:no-underline py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                    <Smartphone className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium">App Development</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Native and cross-platform mobile applications for iOS and Android
-                    </p>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="pb-6">
-                <div className="ml-14">
-                  <h4 className="font-medium mb-3">What we offer:</h4>
-                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
-                    <li>• Native iOS & Android Apps</li>
-                    <li>• Cross-platform Solutions</li>
-                    <li>• UI/UX Design for Mobile</li>
-                    <li>• App Store Optimization</li>
-                    <li>• Backend Integration</li>
-                  </ul>
-                  <h4 className="font-medium mb-3">Technologies:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {["React Native", "Flutter", "Swift", "Kotlin", "Firebase"].map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-muted text-xs rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="automation-solutions" className="border border-border rounded-lg px-6">
-              <AccordionTrigger className="text-left hover:no-underline py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                    <Cog className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium">Automation Solutions</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Streamline your workflows and boost productivity with custom automation
-                    </p>
-                  </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="pb-6">
-                <div className="ml-14">
-                  <h4 className="font-medium mb-3">What we offer:</h4>
-                  <ul className="space-y-2 text-sm text-muted-foreground mb-6">
-                    <li>• Business Process Automation</li>
-                    <li>• API Integrations</li>
-                    <li>• Custom Workflow Solutions</li>
-                    <li>• Data Migration & Sync</li>
-                    <li>• Third-party Tool Integration</li>
-                  </ul>
-                  <h4 className="font-medium mb-3">Technologies:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {["Zapier", "Make", "Python", "Node.js", "REST APIs"].map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-muted text-xs rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </section>
-
-      <Separator className="my-16" />
-
-      {/* About Us Section */}
-      <section className="px-6 md:px-8 py-16">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">About Us</h2>
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold mb-2">5+</div>
-              <div className="text-muted-foreground">Developers</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">1+</div>
-              <div className="text-muted-foreground">Years of Experience</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">10+</div>
-              <div className="text-muted-foreground">Clients Closed</div>
-            </div>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">about.</h2>
+          
+          <div className="max-w-4xl">
+            <p className="text-lg md:text-xl leading-relaxed text-gray-700 mb-8">
+              Our team blends design, development and automation expertise to deliver sleek, functional and modern digital experiences.
+            </p>
+            <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+              I'm dedicated to crafting beautiful and highly functional designs that seamlessly align with my clients' unique needs and long-term goals.
+            </p>
           </div>
         </div>
       </section>
 
       <Separator className="my-16" />
 
-      {/* Contact Us Section */}
-      <section className="px-6 md:px-8 py-16">
+      {/* Contact Section */}
+      <section id="contact" className="px-6 md:px-8 py-16">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Contact Us</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Ready to start your next project? Let's discuss how we can help bring your vision to life.
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            Curious about what we can create together?
+          </h2>
+          <p className="text-lg text-gray-700 mb-8">
+            Let's bring something extraordinary to life!
           </p>
-          <Button asChild className="bg-black text-white hover:bg-gray-800 px-8 py-3">
-            <a href="https://tally.so/r/waLW89" target="_blank" rel="noopener noreferrer">Get In Touch</a>
-          </Button>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Button asChild className="bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-none">
+              <a href="https://tally.so/r/waLW89" target="_blank" rel="noopener noreferrer">
+                Get in Touch
+              </a>
+            </Button>
+            <div className="px-8 py-3 text-black">
+              Available For Work
+            </div>
+          </div>
+
+          <div className="flex justify-center items-center text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <Mail className="w-4 h-4" />
+              <span>madhavvarshney1879@gmail.com</span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-8 py-8 border-t">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-sm text-muted-foreground">© 2025 Quild Studios. All rights reserved.</div>
-          <div className="text-sm text-muted-foreground">hello@quildstudios.com</div>
+      <footer className="px-6 md:px-8 py-8 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="text-sm text-gray-600">
+            Designed & Developed by Quild Studios
+          </div>
+          <div className="text-sm text-gray-600">
+            All rights reserved, Quild ©2024
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="#" className="text-gray-600 hover:text-black transition-colors">
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a href="#" className="text-gray-600 hover:text-black transition-colors">
+              <Github className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </footer>
     </div>
