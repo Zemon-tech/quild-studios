@@ -10,10 +10,10 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Quild Studios - Minimal Web & App Design Agency",
+  title: "Quild Studios - Web & App Development Agency",
   description:
-    "A 5-member creative agency specializing in minimal web & app design and workflow automation, working remotely with clients worldwide.",
-  generator: "v0.app",
+    "A 5-member creative agency specializing in web & app development and workflow automation, working remotely with clients worldwide.",
+  generator: "Next.js",
 }
 
 export default function RootLayout({
